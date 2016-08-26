@@ -1,0 +1,31 @@
+body {
+	background-color: #AEEBE4;
+	color: #E5E4E2;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+#app{
+	padding: 5px;
+	background-color:  #179C8C ;
+}
+
+.log{
+	margin: 10px;
+	color: black;
+	background-color:  #AEEBE4;
+	list-style: none;
+}
+
+.reading{
+	font-size: 1.33em;
+	padding-bottom: 10px;
+}
+
+.reading-cont {
+	padding: 10px;
+	border-bottom: solid 1px black;
+}
+
+.date{
+	color: #808080;
+}
