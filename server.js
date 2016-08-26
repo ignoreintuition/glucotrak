@@ -1,7 +1,11 @@
+// server.js
+
 const express 		= require('express');
 const bodyParser 	= require('body-parser');
 const app 			= express();
-const path 			= require('path')
+const path 			= require('path');
+const MongoClient	= require('mongodb').MongoClient;
+const config		= require('./config.js');
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
@@ -11,10 +15,23 @@ app.get('/', (req, res) => {
 })
 
 app.post('/resp', (req, res) => {
-  console.log(req.body)
+	db.collection('glucotrak').save(req.body, (err, result) => {
+		if (err) return console.log(err)
+		console.log('saved to database')
+		res.redirect('/')
+	})
 })
 
-app.listen(3000, function(){
-	console.log('listening on 3000')
+
+var db
+
+MongoClient.connect('mongodb://'+config.mongo.user+':'+config.mongo.password+'@ds013966.mlab.com:13966/rwd-test', (err, database) => {
+	if (err) return console.log(err)
+	db = database
+	app.listen(3000, () => {
+		console.log('listening on 3000')
+	})
+
 })
+
 
