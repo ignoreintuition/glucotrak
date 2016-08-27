@@ -5,14 +5,14 @@ const bodyParser 	= require('body-parser');
 const app 			= express();
 const path 			= require('path');
 const MongoClient	= require('mongodb').MongoClient;
-const config		= require('./config.js');
+//const config		= require('./config.js');
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
 
 var db
 MongoClient.connect(
-	config.MONGODB_URI, 
+	MONGODB_URI, 
 	(err, database) => {
 	if (err) return console.log(err)
 	db = database
