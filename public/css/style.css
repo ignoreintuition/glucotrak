@@ -41,11 +41,20 @@ body {
 	color: #808080;
 }
 
-input[type=number] {
-    width: 100%;
+input{
+    width: 95%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 10px;
     box-sizing: border-box;
     color: #000000;
 }
 
+.logo {
+  display: block;
+  text-indent: -9999px;
+  width: 100px;
+  height: 82px;
+  background: url(../img/logo.svg);
+  background-size: 100px 82px;
+  fill: #94d31b;
+}

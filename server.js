@@ -1,11 +1,12 @@
 // server.js
 
-const express 		= require('express');
-const bodyParser 	= require('body-parser');
-const app 			= express();
-const path 			= require('path');
-const MongoClient	= require('mongodb').MongoClient;
-//var config 			= require('./config.json');
+const express 			= require('express');
+const bodyParser 		= require('body-parser');
+const app 				= express();
+const path 				= require('path');
+const MongoClient		= require('mongodb').MongoClient;
+const passport			= require('passport')
+const LocalStrategy 	= require('passport-local').Strategy;
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,7 +19,7 @@ MongoClient.connect(
 	db = database
 	var port = process.env.PORT || 3000;
 	app.listen(port, () => {
-		console.log('listening')
+		console.log('listening on '+ port)
 	})
 })
 
@@ -33,6 +34,10 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/index.html');
 })
 
+app.get('/login', (req, res) => {
+	res.sendFile(__dirname + '/public/login.html');
+})
+
 app.post('/resp', (req, res) => {
 	db.collection('glucotrak').save(req.body, (err, result) => {
 		if (err) return console.log(err)
@@ -42,5 +47,28 @@ app.post('/resp', (req, res) => {
 })
 
 
+const user = {
+	username: 'test-user',
+	password: 'test-password',
+	id: 1
+}
+
+passport.use(new LocalStrategy(
+	function(username, password, done){
+		User.findOne({username: username}, function(err, user){
+			if (err) {return done(err);}
+			if(!user){
+				return done(null, false, {message: 'incorrect username'});
+			}
+			if(!user.validPassword(password)){
+				return done(null, false, {message: 'incorrect password'})
+			}
+			return done(null, user);
+		});
+	}
+	)
+);
+
+app.post('/login', passport.authenticate('local', {successRedirect: '/', failureRedirect: '/login'}));  
 
 

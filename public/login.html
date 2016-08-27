@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>GLUCOTRAK</title>
+	<title>GLUCOTRACK - Login</title>
 	<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
-</head>
+
 <body>
 	<div id="app">
 		<div class="masthead">
@@ -20,29 +20,12 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<input
-						placeholder="Enter your blood sugar for today and hit ENTER" 
-						type="number" 
-						tabindex="1" 
-						autofocus 
-						v-model="newBloodSugar" 
-						v-on:keyup.enter="addBloodSugar">
+					<form>
+						<input type="text" placeholder="User ID">
+						<input type="password" placeholder="Password">
+						<button type="submit">Submit</button>
+					</form>
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="log col-md-8">
-				<div class="reading-cont row" v-for="bs in log">
-					<div class="reading">{{bs.value}} mg/dL</div>
-					<div class="date">{{bs.date}} </div>
-				</div>
-				<div class="reading-cont row">
-					<div class="reading">Average: {{avg}} mg/dL</div>
-				</div>
-			</div>
-			<div class="sidebar col-md-3">
-				<H2> Did you know </H2>
-				<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
 			</div>
 		</div>
 	</div>

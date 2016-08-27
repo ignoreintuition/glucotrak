@@ -6,3 +6,10 @@ GlucoTrak is a simple yet effective monitoring system for tracking blood glucose
 
 ## Local Setup
 
+```
+cd glucotrack
+npm install
+mongod 
+node server.jss
+```
+
