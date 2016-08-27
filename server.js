@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var db
 MongoClient.connect(
-	process.env.MONGOLAB_AQUA_URI,  
+	process.env.MONGOLAB_AQUA_URI || 'mongodb://localhost',  
 	(err, database) => {
 	if (err) return console.log(err)
 	db = database
