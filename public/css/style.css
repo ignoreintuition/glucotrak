@@ -4,12 +4,23 @@ body {
 	font-family: Verdana, Geneva, sans-serif;
 }
 
-#app{
+.masthead, .footer{
 	padding: 5px;
 	background-color:  #179C8C ;
 }
+.footer a:link,
+.footer a:visited,
+.footer a:active,
+.footer a:focus
+ {
+	color:#E5E4E2;
+}
 
-.log{
+.footer{
+	text-align: center;
+}
+
+.log, .sidebar{
 	margin: 10px;
 	color: black;
 	background-color:  #AEEBE4;
@@ -29,3 +40,12 @@ body {
 .date{
 	color: #808080;
 }
+
+input[type=number] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    color: #000000;
+}
+

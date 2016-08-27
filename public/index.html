@@ -8,19 +8,42 @@
 </head>
 <body>
 	<div id="app">
-		<H1>LOGBOOK - A Diabetes Tracking App</H1>
-		<label> Enter your blood sugar for today </label>
-		<input type="number" v-model="newBloodSugar" v-on:keyup.enter="addBloodSugar">
-		<div class="log">
-			<div class="reading-cont" v-for="bs in log">
-				<div class="reading">{{bs.value}} mg/dL</div>
-				<div class="date">{{bs.date}} </div>
+		<div class="row masthead">
+			<div class="col-md-12">
+				<H1>GLUCOTRAK - A Diabetes Tracking App</H1>
+				<label> Enter your blood sugar for today and hit ENTER </label>
+				<input type="number" tabindex="1" autofocus v-model="newBloodSugar" v-on:keyup.enter="addBloodSugar">
 			</div>
-			<div class="reading-cont">
-				<div class="reading">Average: {{avg}} mg/dL</div>
+		</div>
+		<div class="row">
+			<div class="log col-md-8">
+				<div class="reading-cont row" v-for="bs in log">
+					<div class="reading">{{bs.value}} mg/dL</div>
+					<div class="date">{{bs.date}} </div>
+				</div>
+				<div class="reading-cont row">
+					<div class="reading">Average: {{avg}} mg/dL</div>
+				</div>
+			</div>
+			<div class="sidebar col-md-3">
+				<H2> Did you know </H2>
+				<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
 			</div>
 		</div>
 	</div>
+	<div class="row footer">
+		<div class="col-md-4">
+			Another sweet app from Resurgence Web Design
+		</div>
+		<div class="col-md-4">
+			Copyright 2016
+		</div>
+		<div class="col-md-4">
+			<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
+		</div>
+
+	</div>
+
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="js/index.js"></script>
