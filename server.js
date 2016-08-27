@@ -5,18 +5,18 @@ const bodyParser 	= require('body-parser');
 const app 			= express();
 const path 			= require('path');
 const MongoClient	= require('mongodb').MongoClient;
-//const config		= require('./config.js');
+var config 			= require('./config.json');
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
 
 var db
 MongoClient.connect(
-	process.env.MONGOLAB_URI, 
+	process.env.MONGOLAB_URI, {},  
 	(err, database) => {
 	if (err) return console.log(err)
 	db = database
-	app.listen(process.env.PORT || 3000, () => {
+	app.listen(config.PORT || 3000, () => {
 		console.log('listening')
 	})
 })
@@ -26,7 +26,6 @@ app.get('/req', (req, res) => {
 		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify(results, null, 3));
 	})
-	//res.redirect('/');
 })
 
 app.get('/', (req, res) => {
