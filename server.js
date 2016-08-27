@@ -12,10 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var db
 MongoClient.connect(
-	'mongodb://' +
-		config.mongo.user + ':' +
-		config.mongo.password +
-		config.mongo.database, 
+	config.MONGODB_URI, 
 	(err, database) => {
 	if (err) return console.log(err)
 	db = database
