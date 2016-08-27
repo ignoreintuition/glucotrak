@@ -16,7 +16,7 @@ MongoClient.connect(
 	(err, database) => {
 	if (err) return console.log(err)
 	db = database
-	app.listen(config.PORT || 3000, () => {
+	app.listen(3000, () => {
 		console.log('listening')
 	})
 })
