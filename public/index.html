@@ -9,26 +9,24 @@
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
 </head>
 <body>
-	<div class="row" id="app">
+	<div id="app">
 		<div class="masthead row">
-			<div class="row">
-				<div class="col-md-2">
-					<a href="/" class="logo"> Glucotrak </a>
-				</div>
-				<div class="col-md-10">
-					<H1>GLUCOTRAK - A Diabetes Tracking App</H1>
-				</div>
+			<div class="col-md-2">
+				<a href="/" class="logo"> Glucotrak </a>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<input
-						placeholder="Enter your blood sugar for today and hit ENTER" 
-						type="number" 
-						tabindex="1" 
-						autofocus 
-						v-model="newBloodSugar" 
-						v-on:keyup.enter="addBloodSugar">
-				</div>
+			<div class="col-md-10">
+				<H1>GLUCOTRAK - A Diabetes Tracking App</H1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<input
+				placeholder="Enter your blood sugar for today and hit ENTER" 
+				type="number" 
+				tabindex="1" 
+				autofocus 
+				v-model="newBloodSugar" 
+				v-on:keyup.enter="addBloodSugar">
 			</div>
 		</div>
 		<div class="row">
@@ -48,19 +46,20 @@
 				<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
 			</div>
 		</div>
-	</div>
-	<div class="row footer">
-		<div class="col-md-4">
-			Another sweet app from Resurgence Web Design
-		</div>
-		<div class="col-md-4">
-			Copyright 2016
-		</div>
-		<div class="col-md-4">
-			<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
-		</div>
+		<div class="row footer">
+			<div class="col-md-4">
+				Another sweet app from Resurgence Web Design
+			</div>
+			<div class="col-md-4">
+				Copyright 2016
+			</div>
+			<div class="col-md-4">
+				<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
+			</div>
 
+		</div>
 	</div>
+
 
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
