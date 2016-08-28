@@ -10,6 +10,6 @@ GlucoTrak is a simple yet effective monitoring system for tracking blood glucose
 cd glucotrack
 npm install
 mongod 
-node server.jss
+npm run dev
 ```
 

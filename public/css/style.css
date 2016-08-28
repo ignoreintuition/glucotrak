@@ -57,6 +57,7 @@ input {
   background: url(../img/logo.svg);
   background-size: 100px 82px;
   fill: #94d31b;
+  float: left;
 }
 
 input[type=submit] {
