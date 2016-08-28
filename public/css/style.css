@@ -41,7 +41,7 @@ body {
 	color: #808080;
 }
 
-input{
+input {
     width: 95%;
     padding: 12px 20px;
     margin: 10px;
@@ -57,4 +57,9 @@ input{
   background: url(../img/logo.svg);
   background-size: 100px 82px;
   fill: #94d31b;
+}
+
+input[type=submit] {
+	border-radius: 5px;
+	background: #f4f4f4;
 }

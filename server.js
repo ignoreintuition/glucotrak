@@ -10,18 +10,19 @@ const LocalStrategy 	= require('passport-local').Strategy;
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 var db
 MongoClient.connect(
 	process.env.MONGOLAB_AQUA_URI || 'mongodb://localhost',  
 	(err, database) => {
-	if (err) return console.log(err)
-	db = database
-	var port = process.env.PORT || 3000;
-	app.listen(port, () => {
-		console.log('listening on '+ port)
+		if (err) return console.log(err)
+			db = database
+		var port = process.env.PORT || 3000;
+		app.listen(port, () => {
+			console.log('listening on '+ port)
+		})
 	})
-})
 
 app.get('/req', (req, res) => {
 	var cursor = db.collection('glucotrak').find().toArray(function(err, results) {
@@ -46,29 +47,42 @@ app.post('/resp', (req, res) => {
 	})
 })
 
-
-const user = {
-	username: 'test-user',
-	password: 'test-password',
-	id: 1
-}
-
 passport.use(new LocalStrategy(
 	function(username, password, done){
-		User.findOne({username: username}, function(err, user){
-			if (err) {return done(err);}
+		db.collection('users').findOne({username: username}, function(err, user){
+			if (err) {
+				console.log('err');
+				return done(err);}
 			if(!user){
+				console.log('!user');
 				return done(null, false, {message: 'incorrect username'});
 			}
-			if(!user.validPassword(password)){
+			if(user.password != password){
+				console.log('!password')
 				return done(null, false, {message: 'incorrect password'})
 			}
+			console.log('logged in')
 			return done(null, user);
 		});
 	}
 	)
 );
 
-app.post('/login', passport.authenticate('local', {successRedirect: '/', failureRedirect: '/login'}));  
+app.post('/login', 
+	passport.authenticate('local', { 	
+		successRedirect: '/', 
+		failureRedirect: '/login'
+	})
+);
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+
 
 
