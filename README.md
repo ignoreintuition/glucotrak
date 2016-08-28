@@ -6,10 +6,14 @@ GlucoTrak is a simple yet effective monitoring system for tracking blood glucose
 
 ## Local Setup
 
+Please note that running a local instance of GlucoTrak requires you to have Mongo Database running locally on your machine.  It uses the following two connections:
+
+* glucotrak
+* users
+
 ```
 cd glucotrack
 npm install
-mongod 
 npm run dev
 ```
 
