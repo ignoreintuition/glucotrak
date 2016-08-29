@@ -1,6 +1,7 @@
 var glucotrak = glucotrak || {}
 
 glucotrak.log = [];
+glucotrak.user = '';
 
 $.getJSON("/req", function(result){
 	$.each(result, function(i, field){
@@ -8,11 +9,16 @@ $.getJSON("/req", function(result){
 	});
 });
 
+$.getJSON("/user", function(result){
+	glucotrak.user = result.username;
+});
+
 new Vue({
 	el: '#app',
 	data: {
 		newBloodSugar: null,
 		log: glucotrak.log,
+		name: glucotrak.user,
 		avg: 0
 	},
 	methods: {

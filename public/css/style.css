@@ -4,6 +4,9 @@ body {
 	font-family: Verdana, Geneva, sans-serif;
 }
 
+.masthead h1 {
+	font-size: 1.66em;
+}
 .masthead, .footer{
 	padding: 5px;
 	background-color:  #179C8C ;
@@ -52,10 +55,10 @@ input {
 .logo {
   display: block;
   text-indent: -9999px;
-  width: 100px;
-  height: 82px;
+  width: 50px;
+  height: 50px;
   background: url(../img/logo.svg);
-  background-size: 100px 82px;
+  background-size: 50px 50px;
   fill: #94d31b;
   float: left;
 }

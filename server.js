@@ -47,6 +47,11 @@ app.get('/req', function(req, res)  {
 	})
 })
 
+app.get('/user', function(req, res)  {
+	passport.authenticate('local');
+	res.send(JSON.stringify({username: req.user.username}, null, 3));
+})
+
 app.get('/login', (req, res) => {
 	res.sendFile(__dirname + '/public/login.html');
 })
