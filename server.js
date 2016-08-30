@@ -41,10 +41,8 @@ app.get('/', (req, res) => {
 
 app.get('/req', function(req, res)  {
 	passport.authenticate('local');
-	var cursor = db.collection('glucotrak').find({"userid":req.user._id})
-	cursor.sort("_id", -1);
-	cursor.toArray(function(err, results) {
-		res.setHeader('Content-Type', 'text/html');
+	var cursor = db.collection('glucotrak').find({"userid":req.user._id}).toArray(function(err, results) {
+		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify(results, null, 3));
 	})
 })
