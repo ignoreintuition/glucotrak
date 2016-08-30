@@ -44,7 +44,7 @@ app.get('/req', function(req, res)  {
 	var cursor = db.collection('glucotrak').find({"userid":req.user._id})
 	cursor.sort("_id", -1);
 	cursor.toArray(function(err, results) {
-		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Content-Type', 'text/html');
 		res.send(JSON.stringify(results, null, 3));
 	})
 })
