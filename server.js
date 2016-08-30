@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(session({
-	secret: 'keyboard cat',
+	secret: 'itsasecret',
 	resave: false,
 	saveUninitialized: true,
 	cookie: { secure: false }
@@ -41,7 +41,9 @@ app.get('/', (req, res) => {
 
 app.get('/req', function(req, res)  {
 	passport.authenticate('local');
-	var cursor = db.collection('glucotrak').find({"userid":req.user._id}).toArray(function(err, results) {
+	var cursor = db.collection('glucotrak').find({"userid":req.user._id})
+	cursor.sort("_id", -1);
+	cursor.toArray(function(err, results) {
 		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify(results, null, 3));
 	})

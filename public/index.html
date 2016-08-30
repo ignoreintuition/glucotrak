@@ -29,7 +29,6 @@
 		</div>
 		<div class="row">
 			<div class="log col-md-8">
-				<div> welcome back {{name}}</div>
 				<div class="reading-cont row" v-for="bs in log">
 					<div class="reading">{{bs.value}} mg/dL</div>
 					<div class="date">{{bs.date}} </div>
@@ -39,8 +38,14 @@
 				</div>
 			</div>
 			<div class="sidebar col-md-3">
-				<H2><a href="/login"> Member Login </a></H2>
-				<p> Members can log their blood sugars and export them out for their doctors </p>
+				<div v-if="name"> 
+					<H2>Howdy</H2>
+					<p>Welcome back {{name}}.  Remember to check your blood sugar between 2-4 times per day.
+				</div>
+				<div v-if="!name">
+					<H2><a href="/login"> Member Login </a></H2>
+					<p> Members can log their blood sugars and export them out for their doctors </p>
+				</div>
 				<H2> Did you know </H2>
 				<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
 			</div>
