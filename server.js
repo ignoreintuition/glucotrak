@@ -8,8 +8,9 @@ const path 				= require('path');
 const MongoClient		= require('mongodb').MongoClient;
 const passport			= require('passport')
 const LocalStrategy 	= require('passport-local').Strategy;
-const jwt 				= require('jsonwebtoken');
 const cookieParser		= require('cookie-parser');
+const HashStrategy		= require('passport-hash').Strategy;
+const _und				= require('underscore');
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,6 +24,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//instantiate connection to Mongo Database
 var db
 MongoClient.connect(
 	process.env.MONGOLAB_AQUA_URI || 'mongodb://localhost',  
@@ -35,13 +37,17 @@ MongoClient.connect(
 		})
 	})
 
+// Serve up index.html page
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/index.html');
 })
 
+// Once authenticated req will pass back all of the records
+// in JSON format for the user_id supplied
 app.get('/req', function(req, res)  {
 	passport.authenticate('local');
 	var cursor = db.collection('glucotrak').find({"userid":req.user._id}).toArray(function(err, results) {
+		var results = _und.sortBy(results, '_id').reverse();
 		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify(results, null, 3));
 	})
