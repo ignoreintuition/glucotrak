@@ -2,26 +2,30 @@ var glucotrak = glucotrak || {}
 
 glucotrak.log = [];
 glucotrak.user = '';
-
-$.getJSON("/user", function(result){
-	glucotrak.user = result.username;
-}).done(function() {
-	$.getJSON("/req", function(result){
-		$.each(result, function(i, field){
-			glucotrak.log.push(field);
+try {
+	$.getJSON("/user", function(result){
+		glucotrak.user = result.username || "";
+	}).done(function() {
+		$.getJSON("/req", function(result){
+			$.each(result, function(i, field){
+				glucotrak.log.push(field);
+			})		
+		}).done(function(){
+			console.log('successfully parsed log')
+		}).fail(function(){
+			console.log('failed to parse log')
+		}).always(function(){
+			render();		
 		})
-	}).done(function(){
-		console.log('successfully parsed log')
 	}).fail(function(){
-		console.log('failed to parse log')
+		console.log('fail to parse user');
 	}).always(function(){
-		render()		
-	})
-}).fail(function(){
-	console.log('fail to parse user');
-}).always(function(){
-	render();
-});
+		render();
+	});
+}
+catch(err){
+	console.log(err);
+}
 
 function render() {
 	var vm = new Vue({
@@ -30,7 +34,8 @@ function render() {
 			newBloodSugar: null,
 			log: glucotrak.log,
 			name: glucotrak.user,
-			avg: 0
+			avg: calcAvg(glucotrak.log)
+
 		},
 		methods: {
 			addBloodSugar: function() {
@@ -46,15 +51,17 @@ function render() {
 					});
 				}
 				this.newBloodSugar = null;
-			},
-			avgBloodSugar: function(){
-				var sum = 0;
-				for( var i = 0; i < this.log.length; i++ ){
-					sum += parseInt( this.log[i].value, 10 ); 
-				}
-				this.avg = sum / this.log.length;
+				this.avg = calcAvg(this.log);
 			}
 		}
-	})
-	
+	})	
+}
+
+function calcAvg(log){
+	var sum = 0;
+	for( var i = 0; i < log.length; i++ ){
+		sum += parseInt( log[i].value, 10 ); 
+	}
+	avg = sum / log.length;
+	return avg;
 }
