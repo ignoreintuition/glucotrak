@@ -35,7 +35,6 @@ function render() {
 			log: glucotrak.log,
 			name: glucotrak.user,
 			avg: calcAvg(glucotrak.log)
-
 		},
 		methods: {
 			addBloodSugar: function() {

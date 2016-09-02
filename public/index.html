@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>GLUCOTRAK</title>
 	<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+	<link rel="apple-touch-icon" href="img/logo.png">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
 </head>
@@ -16,7 +17,7 @@
 				<H1>GLUCOTRAK - A Diabetes Tracking App</H1>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row content-form">
 			<div class="col-md-12">
 				<input
 				placeholder="Enter your blood sugar for today and hit ENTER" 
@@ -27,17 +28,17 @@
 				v-on:keyup.enter="addBloodSugar">
 			</div>
 		</div>
-		<div class="row">
-			<div class="log col-md-8">
-				<div class="reading-cont row" v-for="bs in log">
+		<div class="row content">
+			<div class="col-md-8 log">
+				<div class="reading-cont" v-for="bs in log">
 					<div class="reading">{{bs.value}} mg/dL</div>
 					<div class="date">{{bs.date}} </div>
 				</div>
-				<div class="reading-cont row">
+				<div class="reading-bott">
 					<div class="reading">Average: {{avg}} mg/dL</div>
 				</div>
 			</div>
-			<div class="sidebar col-md-3">
+			<div class="sidebar col-md-4">
 				<div v-if="name"> 
 					<H2>Howdy</H2>
 					<p>Welcome back {{name}}.  Remember to check your blood sugar between 2-4 times per day.
@@ -45,13 +46,13 @@
 				<div v-if="!name">
 					<H2><a href="/login"> Member Login </a></H2>
 					<p> Members can log their blood sugars and export them out for their doctors </p>
-					<p> Not a member?  We are currently looking for testers (no pun intended). Send an email: <a href="mailto:brian@resurgencewebdesign.com">brian@resurgencewebdesign.com </a>
+					<p> Not a member?  <a href="/signup"> Sign up today</a>.  We are currently looking for testers (no pun intended). Send any questions: <a href="mailto:brian@resurgencewebdesign.com">brian@resurgencewebdesign.com </a>
 				</div>
 				<H2> Did you know </H2>
 				<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
 			</div>
 		</div>
-		<div class="row footer">
+		<div  class="row footer">
 			<div class="col-md-4">
 				Another sweet app from Resurgence Web Design
 			</div>
@@ -61,10 +62,8 @@
 			<div class="col-md-4">
 				<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
 			</div>
-
 		</div>
 	</div>
-
 
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>

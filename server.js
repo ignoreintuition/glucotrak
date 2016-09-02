@@ -62,6 +62,10 @@ app.get('/login', (req, res) => {
 	res.sendFile(__dirname + '/public/login.html');
 })
 
+app.get('/signup', (req, res) => {
+	res.sendFile(__dirname + '/public/signup.html');
+})
+
 app.post('/resp', (req, res ) => {
 	passport.authenticate('local');
 	req.body.userid = req.user._id;
@@ -97,7 +101,16 @@ app.post('/login',
 		successRedirect: '/', 
 		failureRedirect: '/login'
 	})
-	);
+);
+
+app.post('/signup', (req, res ) => {
+	passport.authenticate('local');
+	db.collection('users').save(req.body, (err, result) => {
+		if (err) return console.log(err)
+			console.log('saved to database')
+		res.redirect('/')
+	})
+})
 
 passport.serializeUser(function(user, done) {
 	done(null, user);
