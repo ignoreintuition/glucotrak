@@ -53,19 +53,23 @@ app.get('/req', function(req, res)  {
 	})
 })
 
+// Returns the currently logged in user name
 app.get('/user', function(req, res)  {
 	passport.authenticate('local');
 	res.send(JSON.stringify({username: req.user.username}, null, 3));
 })
 
+//Serve the login page
 app.get('/login', (req, res) => {
 	res.sendFile(__dirname + '/public/login.html');
 })
 
+//serve the sign up page
 app.get('/signup', (req, res) => {
 	res.sendFile(__dirname + '/public/signup.html');
 })
 
+//Post a new reading 
 app.post('/resp', (req, res ) => {
 	passport.authenticate('local');
 	req.body.userid = req.user._id;
@@ -76,6 +80,14 @@ app.post('/resp', (req, res ) => {
 	})
 })
 
+app.post('/del', (req, res) => {
+	passport.authenticate('local');
+	db.collection('glucotrak').deleteMany(
+		{ "guid": req.body.guid }
+	)
+})
+
+//authentication
 passport.use(new LocalStrategy(
 	function(username, password, done){
 		db.collection('users').findOne({username: username}, function(err, user){
@@ -96,6 +108,7 @@ passport.use(new LocalStrategy(
 	})
 );
 
+// login an existing user account
 app.post('/login', 
 	passport.authenticate('local', { 	
 		successRedirect: '/', 
@@ -103,6 +116,7 @@ app.post('/login',
 	})
 );
 
+// signup for a new user account
 app.post('/signup', (req, res ) => {
 	passport.authenticate('local');
 	db.collection('users').save(req.body, (err, result) => {

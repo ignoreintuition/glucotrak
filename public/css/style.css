@@ -102,3 +102,16 @@ input[type=submit] {
 	border-radius: 5px;
 	background: #f4f4f4;
 }
+
+.delete, .edit {
+	color: black;
+	font-size: 1.66em;
+	float: right;
+	text-decoration: none;
+	padding: 5px;
+}
+
+.delete {
+	color: red;
+
+}

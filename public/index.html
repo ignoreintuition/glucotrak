@@ -8,6 +8,7 @@
 	<link rel="apple-touch-icon" href="img/logo.png">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 <body>
 	<div id="app">
@@ -31,7 +32,12 @@
 		<div class="row content">
 			<div class="col-md-8 log">
 				<div class="reading-cont" v-for="bs in log">
-					<div class="reading">{{bs.value}} mg/dL</div>
+					<div class="reading">{{bs.value}} mg/dL
+						<i 	class="fa fa-2x fa-times delete" 
+						aria-hidden="true"
+						v-on:click="delete(bs)"></i>
+						<i 	class="fa fa-2x fa-pencil-square-o edit"> </i> 
+					</div> 
 					<div class="date">{{bs.date}} </div>
 				</div>
 				<div class="reading-bott">
@@ -42,32 +48,32 @@
 				<div v-if="name"> 
 					<H2>Howdy</H2>
 					<p>Welcome back {{name}}.  Remember to check your blood sugar between 2-4 times per day.
+					</div>
+					<div v-if="!name">
+						<H2><a href="/login"> Member Login </a></H2>
+						<p> Members can log their blood sugars and export them out for their doctors </p>
+						<p> Not a member?  <a href="/signup"> Sign up today</a>.  We are currently looking for testers (no pun intended). Send any questions: <a href="mailto:brian@resurgencewebdesign.com">brian@resurgencewebdesign.com </a>
+						</div>
+						<H2> Did you know </H2>
+						<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
+					</div>
 				</div>
-				<div v-if="!name">
-					<H2><a href="/login"> Member Login </a></H2>
-					<p> Members can log their blood sugars and export them out for their doctors </p>
-					<p> Not a member?  <a href="/signup"> Sign up today</a>.  We are currently looking for testers (no pun intended). Send any questions: <a href="mailto:brian@resurgencewebdesign.com">brian@resurgencewebdesign.com </a>
+				<div  class="row footer">
+					<div class="col-md-4">
+						Another sweet app from Resurgence Web Design
+					</div>
+					<div class="col-md-4">
+						Copyright 2016
+					</div>
+					<div class="col-md-4">
+						<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
+					</div>
 				</div>
-				<H2> Did you know </H2>
-				<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
 			</div>
-		</div>
-		<div  class="row footer">
-			<div class="col-md-4">
-				Another sweet app from Resurgence Web Design
-			</div>
-			<div class="col-md-4">
-				Copyright 2016
-			</div>
-			<div class="col-md-4">
-				<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
-			</div>
-		</div>
-	</div>
 
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script src='js/uuid.js'></script>
-	<script src="js/index.js"></script>
-</body>
-</html>
+			<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
+			<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+			<script src='js/uuid.js'></script>
+			<script src="js/index.js"></script>
+		</body>
+		</html>

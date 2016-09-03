@@ -10,7 +10,6 @@ try {
 			$.each(result, function(i, field){
 				glucotrak.log.push(field);
 			})		
-			console.log(glucotrak.log);
 		}).done(function(){
 			console.log('successfully parsed log')
 		}).fail(function(){
@@ -55,6 +54,13 @@ function render() {
 				}
 				this.newBloodSugar = null;
 				this.avg = calcAvg(this.log);
+			},
+			delete: function(item){
+				$.post('/del', {
+					guid: item.guid
+				});					
+				this.log.$remove(item);
+
 			}
 		}
 	})	
