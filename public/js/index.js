@@ -10,6 +10,7 @@ try {
 			$.each(result, function(i, field){
 				glucotrak.log.push(field);
 			})		
+			console.log(glucotrak.log);
 		}).done(function(){
 			console.log('successfully parsed log')
 		}).fail(function(){
@@ -39,12 +40,15 @@ function render() {
 		methods: {
 			addBloodSugar: function() {
 				var val = this.newBloodSugar.trim();
+				var id = uuid.v1();
 				if (val) {
 					this.log.splice(0, 0, {
+						guid: id,
 						value: val,
 						date: Date(Date.now()).toLocaleString('en-US')
 					});
 					$.post('/resp', {
+						guid: id,
 						value: val,
 						date: Date(Date.now()).toLocaleString('en-US')
 					});
