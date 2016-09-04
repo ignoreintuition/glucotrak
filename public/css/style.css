@@ -17,6 +17,7 @@ body {
 	padding:0px;
 	width:100%;
 	height:100px;
+	padding: 10px;
 
 }
 .content-form, .content {
@@ -104,13 +105,17 @@ input[type=submit] {
 }
 
 .delete, .edit {
-	color: black;
 	font-size: 1.66em;
 	float: right;
 	text-decoration: none;
 	padding: 5px;
+	text-decoration: none;
+	cursor: pointer; 
 }
 
+.edit{
+	color: black;
+}
 .delete {
 	color: red;
 

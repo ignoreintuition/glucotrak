@@ -33,10 +33,10 @@
 			<div class="col-md-8 log">
 				<div class="reading-cont" v-for="bs in log">
 					<div class="reading">{{bs.value}} mg/dL
-						<i 	class="fa fa-2x fa-times delete" 
+						<i class="fa fa-2x fa-times delete" 
 						aria-hidden="true"
 						v-on:click="delete(bs)"></i>
-						<i 	class="fa fa-2x fa-pencil-square-o edit"> </i> 
+						<i class="fa fa-2x fa-pencil-square-o edit"> </i> 
 					</div> 
 					<div class="date">{{bs.date}} </div>
 				</div>

@@ -9,8 +9,9 @@ const MongoClient		= require('mongodb').MongoClient;
 const passport			= require('passport')
 const LocalStrategy 	= require('passport-local').Strategy;
 const cookieParser		= require('cookie-parser');
-const HashStrategy		= require('passport-hash').Strategy;
 const _und				= require('underscore');
+const crypto			= require('crypto');
+
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
@@ -80,31 +81,36 @@ app.post('/resp', (req, res ) => {
 	})
 })
 
+//delete a reading
 app.post('/del', (req, res) => {
 	passport.authenticate('local');
 	db.collection('glucotrak').deleteMany(
 		{ "guid": req.body.guid }
-	)
+		)
 })
 
 //authentication
 passport.use(new LocalStrategy(
 	function(username, password, done){
 		db.collection('users').findOne({username: username}, function(err, user){
+			var hash = crypto.createHash('sha256');
 			if (err) {
 				console.log('err');
-				return done(err);}
-				if(!user){
-					console.log('!user');
-					return done(null, false, {message: 'incorrect username'});
-				}
-				if(user.password != password){
-					console.log('!password')
-					return done(null, false, {message: 'incorrect password'})
-				}
-				console.log('logged in');
-				return done(null, user);
-			});
+				return done(err);
+			}
+			if(!user){
+				console.log('!user');
+				return done(null, false, {message: 'incorrect username'});
+			}
+			hash.update(password);
+			password = hash.digest('hex');	
+			if(user.password != password){
+				console.log('!password')
+				return done(null, false, {message: 'incorrect password'})
+			}
+			console.log('logged in');
+			return done(null, user);
+		});
 	})
 );
 
@@ -114,15 +120,26 @@ app.post('/login',
 		successRedirect: '/', 
 		failureRedirect: '/login'
 	})
-);
+	);
 
 // signup for a new user account
 app.post('/signup', (req, res ) => {
-	passport.authenticate('local');
-	db.collection('users').save(req.body, (err, result) => {
-		if (err) return console.log(err)
-			console.log('saved to database')
-		res.redirect('/')
+	db.collection('users').find({ "username": req.body.username }).toArray(function(err, results){
+		var hash = crypto.createHash('sha256');
+		hash.update(req.body.password);
+		req.body.password = hash.digest('hex');	
+		passport.authenticate('local');
+		console.log(results);
+		if(results[0] == undefined){
+			db.collection('users').save(req.body, (err, result) => {
+				if (err) return console.log(err)
+					console.log('saved to database')
+				res.redirect('/')
+			})
+		}else {
+			console.log('user exists')
+			res.redirect('/signup')
+		}
 	})
 })
 
