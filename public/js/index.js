@@ -1,4 +1,5 @@
-var glucotrak = glucotrak || {}
+var glucotrak 	= glucotrak || {};
+var vm 			= vm || {};
 
 glucotrak.log = [];
 glucotrak.user = '';
@@ -28,13 +29,12 @@ catch(err){
 }
 
 function render() {
-	var vm = new Vue({
+	vm = new Vue({
 		el: '#app',
 		data: {
 			newBloodSugar: null,
 			log: glucotrak.log,
-			name: glucotrak.user,
-			avg: calcAvg(glucotrak.log)
+			name: glucotrak.user
 		},
 		methods: {
 			addBloodSugar: function() {
@@ -60,7 +60,15 @@ function render() {
 					guid: item.guid
 				});					
 				this.log.$remove(item);
-
+				this.avg = calcAvg(this.log);
+			}
+		},
+		computed: {
+			avg: {
+				cache: false,
+				get: function () {
+					return calcAvg(this.log);
+				}
 			}
 		}
 	})	
