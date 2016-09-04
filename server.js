@@ -132,9 +132,10 @@ app.post('/signup', (req, res ) => {
 		console.log(results);
 		if(results[0] == undefined){
 			db.collection('users').save(req.body, (err, result) => {
-				if (err) return console.log(err)
-					console.log('saved to database')
-				res.redirect('/')
+				if (err)
+				{ return console.log(err) }
+				console.log('saved to database')
+				res.redirect('/login')
 			})
 		}else {
 			console.log('user exists')

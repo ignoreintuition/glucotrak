@@ -16,8 +16,8 @@ body {
 	background:#ededed;
 	padding:0px;
 	width:100%;
-	height:100px;
 	padding: 10px;
+	margin: 0px;
 
 }
 .content-form, .content {
@@ -38,6 +38,7 @@ body {
 	bottom:0;
 	left:0;
 	text-align: center;
+	margin:0px;
 }
 
 h1 {
@@ -46,6 +47,7 @@ h1 {
 
 .masthead, .footer{
 	background-color:  #605063 ;
+	color: white;
 }
 
 .footer a:link,
@@ -62,6 +64,16 @@ h1 {
 	list-style: none;
 }
 
+.widget{
+	background-color: #A2C5AA;
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+.widget-content {
+	margin: 10px;
+}
 .reading{
 	font-size: 1.33em;
 	padding-bottom: 10px;
