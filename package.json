@@ -11,7 +11,6 @@
     "mongodb": "^2.2.8",
     "node-uuid": "^1.4.7",
     "passport": "^0.3.2",
-    "passport-hash": "^0.6.0",
     "passport-local": "^1.0.0",
     "underscore": "^1.8.3"
   },

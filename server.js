@@ -12,7 +12,6 @@ const cookieParser		= require('cookie-parser');
 const _und				= require('underscore');
 const crypto			= require('crypto');
 
-
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
@@ -47,17 +46,23 @@ app.get('/', (req, res) => {
 // in JSON format for the user_id supplied
 app.get('/req', function(req, res)  {
 	passport.authenticate('local');
-	var cursor = db.collection('glucotrak').find({"userid":req.user._id}).toArray(function(err, results) {
-		var results = _und.sortBy(results, '_id').reverse();
-		res.setHeader('Content-Type', 'application/json');
-		res.send(JSON.stringify(results, null, 3));
-	})
+	if (req.user){
+		var cursor = db.collection('glucotrak').find({"userid":req.user._id}).toArray(function(err, results) {
+			var results = _und.sortBy(results, '_id').reverse();
+			res.setHeader('Content-Type', 'application/json');
+			res.send(JSON.stringify(results, null, 3));
+		})
+	}
 })
 
 // Returns the currently logged in user name
 app.get('/user', function(req, res)  {
 	passport.authenticate('local');
-	res.send(JSON.stringify({username: req.user.username}, null, 3));
+	if (req.user){
+		res.send(JSON.stringify({username: req.user.username}, null, 3));
+	} else {
+		res.send({}, null, 3);
+	}
 })
 
 //Serve the login page
@@ -122,6 +127,13 @@ app.post('/login',
 	})
 	);
 
+
+// login an existing user account
+app.get('/logout', function(req, res){
+	req.logout();
+	res.redirect('/');
+});
+
 // signup for a new user account
 app.post('/signup', (req, res ) => {
 	db.collection('users').find({ "username": req.body.username }).toArray(function(err, results){
@@ -133,7 +145,7 @@ app.post('/signup', (req, res ) => {
 		if(results[0] == undefined){
 			db.collection('users').save(req.body, (err, result) => {
 				if (err)
-				{ return console.log(err) }
+					{ return console.log(err) }
 				console.log('saved to database')
 				res.redirect('/login')
 			})
