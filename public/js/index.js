@@ -1,6 +1,7 @@
 var glucotrak 	= glucotrak || {};
 var vm 			= vm || {};
 
+glucotrak.range = {"high": 110, "low": 70};
 glucotrak.log = [];
 glucotrak.user = '';
 try {

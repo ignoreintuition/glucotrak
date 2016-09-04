@@ -51,41 +51,58 @@
 							<H2>Howdy</H2>
 							<p>Welcome back {{name}}.  Remember to check your blood sugar between 2-4 times per day. </p>
 							<a href="/logout"> Logout </a>
-							</div>
-						</div>
-					</div>
-					<div v-if="!name">
-						<div class='widget'>
-							<div class='widget-content'>
-								<H2><a href="/login"> Member Login </a></H2>
-								<p> Members can log their blood sugars and export them out for their doctors </p>
-								<p> Not a member?  <a href="/signup"> Sign up today</a>.  We are currently looking for testers (no pun intended). Send any questions: <a href="mailto:brian@resurgencewebdesign.com">brian@resurgencewebdesign.com </a>
-								</div>
-							</div>
-						</div>
-						<div class='widget'>
-							<div class='widget-content'>
-								<H2> Did you know </H2>
-								<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
-							</div>
-						</div>
-					</div>
-					<div  class="row footer">
-						<div class="col-md-4">
-							Another sweet app from Resurgence Web Design
-						</div>
-						<div class="col-md-4">
-							Copyright 2016
-						</div>
-						<div class="col-md-4">
-							<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
 						</div>
 					</div>
 				</div>
+				<div v-if="!name">
+					<div class='widget'>
+						<div class='widget-content'>
+							<H2><a href="/login"> Member Login </a></H2>
+							<p> Members can log their blood sugars and export them out for their doctors </p>
+							<p> Not a member?  <a href="/signup"> Sign up today</a>.  We are currently looking for testers (no pun intended). Send any questions: <a href="mailto:brian@resurgencewebdesign.com">brian@resurgencewebdesign.com </a>
+							</div>
+						</div>
+					</div>
+					<div class='widget'>
+						<div class='widget-content'>
+							<H2> Did you know </H2>
+							<p>The normal blood sugar range for diabetics, as determined by the American Diabetes Association, is between 70 and 130 mg/dL before meals and less than 180 mg/dL a few hours after you began eating. </p>
+						</div>
+					</div>
+					<div class='widget'>
+						<div class='widget-content donate'>
+							<H2> Donate Now </H2>
+							<p>Like using Glucotrak.  Consider making a donation to make the app better</p>
+							<div>
+								<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+									<input type="hidden" name="cmd" value="_s-xclick">
+									<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+									">
+									<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+									<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+								</form>
+							</div>
 
-				<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
-				<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-				<script src='js/uuid.js'></script>
-				<script src="js/index.js"></script>
-			</body>
-			</html>
+						</div>
+					</div>
+
+				</div>
+				<div  class="row footer">
+					<div class="col-md-4">
+						Another sweet app from Resurgence Web Design
+					</div>
+					<div class="col-md-4">
+						Copyright 2016
+					</div>
+					<div class="col-md-4">
+						<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
+					</div>
+				</div>
+			</div>
+
+			<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
+			<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+			<script src='js/uuid.js'></script>
+			<script src="js/index.js"></script>
+		</body>
+		</html>
