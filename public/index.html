@@ -33,6 +33,11 @@
 		</div>
 		<div class="row content">
 			<div class="col-md-8 log">
+				<div v-if="!name">
+					<H1> It's pretty quiet around here </H1>
+					<p> Sign up for an account today and start using Glucotrack to monitor your blood sugar.  Glucotrak is a fast and reliable way to enter blood sugars on your computer or on your mobile device.  Quickly type the reading in and hit enter.  Not fancy bells and whistles.  No additional features.  Just the basics to get your blood sugar logged and get back to your daily activies.</p>
+					<p> Check us out on Facebook as well at <a href="https://www.facebook.com/glucotrak/">https://www.facebook.com/glucotrak/ </a> </p>
+				</div>
 				<div class="reading-cont" v-for="bs in log">
 					<div v-if="bs.writable==true">
 						<form action="/update" method="post">
