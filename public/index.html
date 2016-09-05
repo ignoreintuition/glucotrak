@@ -32,13 +32,26 @@
 		<div class="row content">
 			<div class="col-md-8 log">
 				<div class="reading-cont" v-for="bs in log">
-					<div class="reading">{{bs.value}} mg/dL
-						<i class="fa fa-2x fa-times delete" 
-						aria-hidden="true"
-						v-on:click="delete(bs)"></i>
-						<i class="fa fa-2x fa-pencil-square-o edit"> </i> 
+					<div v-if="bs.writable==true">
+						<form action="/update" method="post">
+							<i class="fa fa-minus-square cancel" v-on:click="cancel(bs)"> </i> <br>
+							<input type="number" name="value" value={{bs.value}}></input>
+							<input type="datetime-local" name="date" value={{bs.date}}></input>
+							<input type="hidden" name="guid" value={{bs.guid}}></input>
+							<input type="submit"></input>
+						</form>
+					</div>
+					<div v-if="bs.writable!=true">
+						<div class="reading">{{bs.value}} mg/dL
+							<i class="fa fa-2x fa-times delete" 
+							aria-hidden="true"
+							v-on:click="delete(bs)"></i>
+							<i class="fa fa-2x fa-pencil-square-o edit"
+							v-on:click="edit(bs)"> </i>
+						</div>
+						<div class="date">{{bs.date}} </div>
+
 					</div> 
-					<div class="date">{{bs.date}} </div>
 				</div>
 				<div class="reading-bott">
 					<div class="reading">Average: {{avg}} mg/dL</div>
@@ -103,6 +116,7 @@
 			<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
 			<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 			<script src='js/uuid.js'></script>
+			<script src='js/moment.min.js'></script>
 			<script src="js/index.js"></script>
 		</body>
 		</html>

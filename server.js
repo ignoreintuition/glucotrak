@@ -11,6 +11,7 @@ const LocalStrategy 	= require('passport-local').Strategy;
 const cookieParser		= require('cookie-parser');
 const _und				= require('underscore');
 const crypto			= require('crypto');
+const moment			= require('moment');
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
@@ -48,7 +49,7 @@ app.get('/req', function(req, res)  {
 	passport.authenticate('local');
 	if (req.user){
 		var cursor = db.collection('glucotrak').find({"userid":req.user._id}).toArray(function(err, results) {
-			var results = _und.sortBy(results, '_id').reverse();
+			var results = _und.sortBy(results, 'date').reverse();
 			res.setHeader('Content-Type', 'application/json');
 			res.send(JSON.stringify(results, null, 3));
 		})
@@ -92,6 +93,18 @@ app.post('/del', (req, res) => {
 	db.collection('glucotrak').deleteMany(
 		{ "guid": req.body.guid }
 		)
+})
+
+//update a reading
+app.post('/update', (req, res) => {
+	passport.authenticate('local');
+	console.log(req.body.date.toLocaleString('en-US'));
+	db.collection('glucotrak').updateOne(
+		{ "guid": req.body.guid }, {
+			$set: {"value": req.body.value, "date": req.body.date}
+		})
+	res.redirect('/')
+
 })
 
 //authentication

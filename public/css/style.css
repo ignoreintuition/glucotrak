@@ -125,6 +125,10 @@ input[type=submit] {
 	cursor: pointer; 
 }
 
+.cancel{
+	cursor: pointer;
+	float:right;
+}
 .edit{
 	color: black;
 }
