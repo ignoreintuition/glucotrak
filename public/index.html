@@ -20,13 +20,15 @@
 		</div>
 		<div class="row content-form">
 			<div class="col-md-12">
-				<input
-				placeholder="Enter your blood sugar for today and hit ENTER" 
-				type="number" 
-				tabindex="1" 
-				autofocus 
-				v-model="newBloodSugar" 
-				v-on:keyup.enter="addBloodSugar">
+				<div v-if="name"> 
+					<input
+					placeholder="Enter your blood sugar for today and hit ENTER" 
+					type="number" 
+					tabindex="1" 
+					autofocus 
+					v-model="newBloodSugar" 
+					v-on:keyup.enter="addBloodSugar">
+				</div>
 			</div>
 		</div>
 		<div class="row content">
@@ -50,11 +52,12 @@
 							v-on:click="edit(bs)"> </i>
 						</div>
 						<div class="date">{{bs.date}} </div>
-
 					</div> 
 				</div>
-				<div class="reading-bott">
-					<div class="reading">Average: {{avg}} mg/dL</div>
+				<div v-if="name"> 
+					<div class="reading-bott">
+						<div class="reading">Average: {{avg}} mg/dL</div>
+					</div>
 				</div>
 			</div>
 			<div class="sidebar col-md-4">
