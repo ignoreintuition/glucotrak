@@ -12,7 +12,7 @@ glucotrak.getData = function() {
 		}).done(function() {
 			$.getJSON("/req", function(result){
 				$.each(result, function(i, field){
-					field.date = moment(field.date).format('llll');
+					field.date = moment(field.date).format('YYYY-MM-DDThh:mm');
 					glucotrak.log.push(field);
 				})		
 			}).done(function(){
@@ -52,13 +52,13 @@ glucotrak.render = function() {
 					this.log.splice(0, 0, {
 						guid: id,
 						value: val,
-						date: moment().format('llll'),
+						date: moment().format('YYYY-MM-DDThh:mm'),
 						writable:false
 					});
 					$.post('/resp', {
 						guid: id,
 						value: val,
-						date: moment().format('llll'),
+						date: moment().format('YYYY-MM-DDThh:mm'),
 						writable: false
 					});
 				}
