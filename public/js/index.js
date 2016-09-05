@@ -13,6 +13,7 @@ glucotrak.getData = function() {
 			$.getJSON("/req", function(result){
 				$.each(result, function(i, field){
 					field.date = moment(field.date).format('YYYY-MM-DDThh:mm');
+					field.dateFormat = moment(field.date).format('llll');
 					glucotrak.log.push(field);
 				})		
 			}).done(function(){
@@ -53,12 +54,14 @@ glucotrak.render = function() {
 						guid: id,
 						value: val,
 						date: moment().format('YYYY-MM-DDThh:mm'),
+						dateFormat: moment().format('llll'),
 						writable:false
 					});
 					$.post('/resp', {
 						guid: id,
 						value: val,
 						date: moment().format('YYYY-MM-DDThh:mm'),
+						dateFormat: moment().format('llll'),
 						writable: false
 					});
 				}
@@ -90,6 +93,11 @@ glucotrak.render = function() {
 					return glucotrak.calcAvg(this.log);
 				}
 			}
+		},
+		filters: {
+			limit: function(arr, limit) {
+				return arr.slice(0, limit)
+			}
 		}
 	})	
 }
@@ -110,3 +118,5 @@ glucotrak.round = function(number, precision) {
 	var roundedTempNumber = Math.round(tempNumber);
 	return roundedTempNumber / factor;
 };
+
+$.webshims.polyfill('forms forms-ext');
