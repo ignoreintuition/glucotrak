@@ -34,7 +34,7 @@
 				<div class="reading-cont" v-for="bs in log">
 					<div v-if="bs.writable==true">
 						<form action="/update" method="post">
-							<i class="fa fa-2x fa-minus-square cancel" v-on:click="cancel(bs)"> </i> <br>
+							<i class="fa fa-2x fa-minus-square cancel" title="Cancel" v-on:click="cancel(bs)"> </i> <br>
 							<input type="number" name="value" value={{bs.value}}></input>
 							<input type="datetime-local" name="date" value={{bs.date}}></input>
 							<input type="hidden" name="guid" value={{bs.guid}}></input>
@@ -43,10 +43,10 @@
 					</div>
 					<div v-if="bs.writable!=true">
 						<div class="reading">{{bs.value}} mg/dL
-							<i class="fa fa-2x fa-times delete" 
+							<i class="fa fa-2x fa-times delete" title="Delete Entry" 
 							aria-hidden="true"
 							v-on:click="delete(bs)"></i>
-							<i class="fa fa-2x fa-pencil-square-o edit"
+							<i class="fa fa-2x fa-pencil-square-o edit" title="Edit Entry"
 							v-on:click="edit(bs)"> </i>
 						</div>
 						<div class="date">{{bs.date}} </div>
@@ -63,16 +63,20 @@
 						<div class='widget-content'>
 							<H2>Howdy</H2>
 							<p>Welcome back {{name}}.  Remember to check your blood sugar between 2-4 times per day. </p>
-							<a href="/logout"> Logout </a>
+							<a href="/logout"><button class ="btn btn-primary fa fa-power-off logout"> Logout </button></a>
+							<a href="mailto:brian@resurgencewebdesign.com"><button class ="btn btn-primary fa fa-share"> Contact Us </button></a>
+
 						</div>
 					</div>
 				</div>
 				<div v-if="!name">
 					<div class='widget'>
 						<div class='widget-content'>
-							<H2><a href="/login"> Member Login </a></H2>
-							<p> Members can log their blood sugars and export them out for their doctors </p>
-							<p> Not a member?  <a href="/signup"> Sign up today</a>.  We are currently looking for testers (no pun intended). Send any questions: <a href="mailto:brian@resurgencewebdesign.com">brian@resurgencewebdesign.com </a>
+							<H2> Member Login</H2>
+							<p> Members can log their blood sugars and export them out for their doctors. Not a member? We are currently looking for testers (no pun intended).<br><br>
+								<a href="/signup"><button class ="btn btn-primary fa fa-user-plus"> Signup </button></a>
+								<a href="/login"><button class ="btn btn-primary fa fa-user"> Login </button></a>
+								<a href="mailto:brian@resurgencewebdesign.com"><button class ="btn btn-primary fa fa-share"> Contact Us </button></a>
 							</div>
 						</div>
 					</div>
