@@ -1,5 +1,6 @@
 // server.js
 
+const flash = require('connect-flash');
 const express 			= require('express');
 const session 			= require('express-session');
 const bodyParser 		= require('body-parser');
@@ -13,6 +14,7 @@ const _und				= require('underscore');
 const crypto			= require('crypto');
 const moment			= require('moment');
 
+app.use(flash());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
@@ -71,6 +73,10 @@ app.get('/login', (req, res) => {
 	res.sendFile(__dirname + '/public/login.html');
 })
 
+app.get('/err', (req, res) => {
+	res.send({messages: req.flash('error')});
+})
+
 //serve the sign up page
 app.get('/signup', (req, res) => {
 	res.sendFile(__dirname + '/public/signup.html');
@@ -108,8 +114,8 @@ app.post('/update', (req, res) => {
 })
 
 //authentication
-passport.use(new LocalStrategy(
-	function(username, password, done){
+passport.use(new LocalStrategy( {passReqToCallback : true},
+	function(req, username, password, done){
 		db.collection('users').findOne({username: username}, function(err, user){
 			var hash = crypto.createHash('sha256');
 			if (err) {
@@ -136,10 +142,9 @@ passport.use(new LocalStrategy(
 app.post('/login', 
 	passport.authenticate('local', { 	
 		successRedirect: '/', 
-		failureRedirect: '/login'
-	})
-	);
-
+		failureRedirect: '/login',
+		failureFlash: true })
+);
 
 // login an existing user account
 app.get('/logout', function(req, res){
@@ -154,7 +159,6 @@ app.post('/signup', (req, res ) => {
 		hash.update(req.body.password);
 		req.body.password = hash.digest('hex');	
 		passport.authenticate('local');
-		console.log(results);
 		if(results[0] == undefined){
 			db.collection('users').save(req.body, (err, result) => {
 				if (err)
@@ -163,7 +167,7 @@ app.post('/signup', (req, res ) => {
 				res.redirect('/login')
 			})
 		}else {
-			console.log('user exists')
+			req.flash('error', 'User Already Exists')
 			res.redirect('/signup')
 		}
 	})

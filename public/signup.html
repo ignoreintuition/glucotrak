@@ -26,31 +26,37 @@
 		<div class="row content">
 			<div class="col-md-12">
 				<h1> Sign up today </H1>
-				<p>Sign up today to be an early alpha tester of our GlucoTrak software.  We are looking for people who are health consious and looking to improve their quality of life.  GlucoTrak is a simple, unobtrusive app that helps you track your sugars across multiple platforms.</p>
-				<form action="/signup" method="post">
-					<label> Select a User name </label> <input type="text" name = "username" placeholder="User ID">
-					<label> Choose your password </label><input type="password" name = "password" placeholder="Password">
-					<input type="submit" value="Sign Up">
-				</form>
+					<p>Sign up today to be an early alpha tester of our GlucoTrak software.  We are looking for people who are health consious and looking to improve their quality of life.  GlucoTrak is a simple, unobtrusive app that helps you track your sugars across multiple platforms.</p>
+					<form action="/signup" method="post">
+						<div id="message"> </div>
+						<label> Select a User name </label> <input type="text" name = "username" placeholder="User ID">
+						<label> Choose your password </label><input type="password" name = "password" placeholder="Password">
+						<input type="submit" value="Sign Up">
+					</form>
+				</div>
+			</div>
+			<div class="row footer">
+				<div class="col-md-4">
+					Resurgence Web Design
+				</div>
+				<div class="col-md-4">
+					Copyright 2016
+				</div>
+				<div class="col-md-4">
+					<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
+				</div>
+
 			</div>
 		</div>
-		<div class="row footer">
-			<div class="col-md-4">
-				Resurgence Web Design
-			</div>
-			<div class="col-md-4">
-				Copyright 2016
-			</div>
-			<div class="col-md-4">
-				<a href="http://www.resurgencewebdesign.com"> resurgencewebdesign.com </a>
-			</div>
-
-		</div>
-	</div>
 
 
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script src="js/index.js"></script>
-</body>
-</html>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+		<script>
+		$.getJSON("/err", function(results){
+			$('#message').html(results.messages[0]);
+		});		
+		</script>
+		<script src="js/index.js"></script>
+	</body>
+	</html>
